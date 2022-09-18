@@ -1,4 +1,4 @@
-package com.lsaac.domin;
+package com.lsaac.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;

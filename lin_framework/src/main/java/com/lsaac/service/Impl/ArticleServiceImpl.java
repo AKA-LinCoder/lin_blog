@@ -4,16 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lsaac.constants.SystemConstants;
-import com.lsaac.domin.entity.Article;
-import com.lsaac.domin.ResponseResult;
-import com.lsaac.domin.vo.HotArticleVo;
+import com.lsaac.domain.entity.Article;
+import com.lsaac.domain.ResponseResult;
+import com.lsaac.domain.vo.HotArticleVo;
 import com.lsaac.mapper.ArticleMapper;
 import com.lsaac.service.ArticleService;
 import com.lsaac.utils.BeanCopyUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

@@ -1,4 +1,4 @@
-package com.lsaac.domin.vo;
+package com.lsaac.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

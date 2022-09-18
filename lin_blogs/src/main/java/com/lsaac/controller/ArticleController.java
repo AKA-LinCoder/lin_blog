@@ -1,6 +1,6 @@
 package com.lsaac.controller;
 
-import com.lsaac.domin.ResponseResult;
+import com.lsaac.domain.ResponseResult;
 import com.lsaac.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
