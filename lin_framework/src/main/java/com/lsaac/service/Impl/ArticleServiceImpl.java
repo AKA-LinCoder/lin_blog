@@ -9,6 +9,7 @@ import com.lsaac.domin.ResponseResult;
 import com.lsaac.domin.vo.HotArticleVo;
 import com.lsaac.mapper.ArticleMapper;
 import com.lsaac.service.ArticleService;
+import com.lsaac.utils.BeanCopyUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +31,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         page(page,queryWrapper);
         List<Article> articles = page.getRecords();
         //bean拷贝
-        List<HotArticleVo> articleVos = new ArrayList<>();
-        for (Article article : articles) {
-            HotArticleVo vo = new HotArticleVo();
-            BeanUtils.copyProperties(article,vo);
-            articleVos.add(vo);
-        }
-
+//        List<HotArticleVo> articleVos = new ArrayList<>();
+//        for (Article article : articles) {
+//            HotArticleVo vo = new HotArticleVo();
+//            BeanUtils.copyProperties(article,vo);
+//            articleVos.add(vo);
+//        }
+        List<HotArticleVo> articleVos =  BeanCopyUtils.copyBeanList(articles, HotArticleVo.class);
         return ResponseResult.okResult(articleVos);
     }
 }
