@@ -1,4 +1,4 @@
-package com.lsaac.domin.entity;
+package com.lsaac.domin;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
