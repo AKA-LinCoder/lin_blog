@@ -6,19 +6,28 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lsaac.constants.SystemConstants;
 import com.lsaac.domain.entity.Article;
 import com.lsaac.domain.ResponseResult;
+import com.lsaac.domain.entity.Category;
 import com.lsaac.domain.vo.ArticleListVo;
 import com.lsaac.domain.vo.HotArticleVo;
 import com.lsaac.domain.vo.PageVo;
 import com.lsaac.mapper.ArticleMapper;
 import com.lsaac.service.ArticleService;
+import com.lsaac.service.CategoryService;
 import com.lsaac.utils.BeanCopyUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
+
+    @Autowired
+    private CategoryService categoryService;
+
     @Override
     public ResponseResult hotArticleList() {
         //查询热门文章,封装
@@ -58,8 +67,29 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //分页查询
         Page<Article> page = new Page<>(pageNum,pageSize);
         page(page,lambdaQueryWrapper);
+        //查询分类名称
+        List<Article> articles = page.getRecords();
+//        articles.stream().map(new Function<Article, Article>() {
+//            @Override
+//            public Article apply(Article article) {
+//                Category category = categoryService.getById(article.getCategoryId());
+//                article.setCategoryName(category.getName());
+//                return article;
+//            }
+//        });
+        List<Article> articleList = articles.stream().map(article -> article.setCategoryName(categoryService.getById(article.getCategoryId()).getName())).collect(Collectors.toList());
+
+
+        //articleId去查找articleName设置
+//        for (Article article : articles) {
+//            Category category = categoryService.getById(article.getCategoryId());
+//            article.setCategoryName(category.getName());
+//        }
         //封装vo
         List<ArticleListVo> articleListVos = BeanCopyUtils.copyBeanList(page.getRecords(), ArticleListVo.class);
+
+
+
         PageVo pageVo = new PageVo(articleListVos,page.getTotal());
         return ResponseResult.okResult(pageVo);
     }

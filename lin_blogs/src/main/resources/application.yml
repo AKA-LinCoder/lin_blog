@@ -6,6 +6,9 @@ spring:
     username: root
     password: 123456789
     driver-class-name: com.mysql.cj.jdbc.Driver
+  main:
+    #允许循环引用
+    allow-circular-references: true
   servlet:
     multipart:
       max-file-size: 2MB
