@@ -7,6 +7,7 @@ import com.lsaac.constants.SystemConstants;
 import com.lsaac.domain.entity.Article;
 import com.lsaac.domain.ResponseResult;
 import com.lsaac.domain.entity.Category;
+import com.lsaac.domain.vo.ArticleDetailVo;
 import com.lsaac.domain.vo.ArticleListVo;
 import com.lsaac.domain.vo.HotArticleVo;
 import com.lsaac.domain.vo.PageVo;
@@ -92,5 +93,21 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
         PageVo pageVo = new PageVo(articleListVos,page.getTotal());
         return ResponseResult.okResult(pageVo);
+    }
+
+    @Override
+    public ResponseResult getArticleDetail(Long id) {
+        //根据ID，查询文章
+        Article article = getById(id);
+        //封装vo
+        ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
+        //根据分类id，查询分类名
+        Long categoryId = articleDetailVo.getCategoryId();
+        Category category = categoryService.getById(categoryId);
+        if (category != null) {
+            articleDetailVo.setCategoryName(category.getName());
+        }
+        //封装相应返回
+        return ResponseResult.okResult(articleDetailVo);
     }
 }
