@@ -99,5 +99,31 @@
 <!--            <artifactId>qiniu-java-sdk</artifactId>-->
 <!--            <version>[7.7.0, 7.7.99]</version>-->
 <!--        </dependency>-->
+        <!--JAXB API是java EE 的API，在java SE 9.0 中不再包含这个 Jar 包。
+默认情况下，Java SE中将不再包含java EE 的Jar包
+在 JDK 6/7 / 8 时关于这个API 都是捆绑在一起的.-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.sun.xml.bind</groupId>-->
+<!--            <artifactId>jaxb-core</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.sun.xml.bind</groupId>-->
+<!--            <artifactId>jaxb-core</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 </project>
