@@ -2,6 +2,7 @@ package com.lsaac.config;
 
 
 //import com.lsaac.filter.JwtAuthenticationTokenFilter;
+import com.lsaac.filter.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-//    @Autowired
-//    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+    @Autowired
+    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 //    @Autowired
 //    AuthenticationEntryPoint authenticationEntryPoint;
 //    @Autowired
@@ -46,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //注销接口需要认证才能访问
                 .antMatchers("/logout").authenticated()
                 .antMatchers("/user/userInfo").authenticated()
-//                .antMatchers("/upload").authenticated()
+                .antMatchers("/link/getAllLink").authenticated()
                 // 除上面外的所有请求全部不需要认证即可访问
                 .anyRequest().permitAll();
 
@@ -56,8 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .accessDeniedHandler(accessDeniedHandler);
         //关闭默认的注销功能
         http.logout().disable();
-        //把jwtAuthenticationTokenFilter添加到SpringSecurity的过滤器链中
-//        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        //把jwtAuthenticationTokenFilter添加到SpringSecurity的过滤器链中，认证过滤器
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         //允许跨域
         http.cors();
     }
