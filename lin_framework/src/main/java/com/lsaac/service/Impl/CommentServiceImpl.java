@@ -2,6 +2,7 @@ package com.lsaac.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lsaac.constants.SystemConstants;
 import com.lsaac.domain.ResponseResult;
 import com.lsaac.domain.entity.Comment;
 
@@ -16,11 +17,11 @@ import com.lsaac.service.CommentService;
 //import org.springframework.data.domain.Page;
 import com.lsaac.service.UserService;
 import com.lsaac.utils.BeanCopyUtils;
-import com.lsaac.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.swing.text.StyleConstants;
 import java.util.List;
 
 /**
@@ -36,11 +37,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Autowired
     private UserService userService;
     @Override
-    public ResponseResult commentList(Long articleId, Integer pageNum, Integer pageSize) {
+    public ResponseResult commentList(String CommentType, Long articleId, Integer pageNum, Integer pageSize) {
         //查询对应文章的根评论
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Comment::getArticleId,articleId);
+        queryWrapper.eq(SystemConstants.ARTICLE_COMMENT.equals(CommentType),Comment::getArticleId,articleId);
         queryWrapper.eq(Comment::getRootId,-1);
+        //评论类型
+        queryWrapper.eq(Comment::getType,CommentType);
         //分页查询
         Page<Comment> page = new Page<>(pageNum,pageSize);
         page(page,queryWrapper);

@@ -9,6 +9,10 @@ spring:
   main:
     #允许循环引用
     allow-circular-references: true
+    #解决Failed to start bean ‘documentationPluginsBootstrapper
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   servlet:
     multipart:
       max-file-size: 2MB
@@ -23,3 +27,8 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
       id-type: auto
+
+oss:
+  accessKey: YyhVJg9WknheHZGf_ctXiPkdRJKyNcp5w0aaBgkw
+  secretKey: aGm9v2d3gfAQijS3b0bxswLBuJ3jM7J5t-oxtS5g
+  bucket: dasddas

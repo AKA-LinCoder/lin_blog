@@ -18,5 +18,7 @@ public class SystemConstants
      *  友链是审核通过的
      */
     public static final String LINK_STATUS_NORMAL = "0";
-    
+
+    public static final String LINK_COMMENT = "1";
+    public static final String ARTICLE_COMMENT = "0";
 }

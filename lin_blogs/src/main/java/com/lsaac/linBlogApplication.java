@@ -4,12 +4,16 @@ package com.lsaac;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 
 @SpringBootApplication
 @MapperScan("com.lsaac.mapper")
+@EnableScheduling
+@EnableSwagger2
 public class linBlogApplication {
 
     //消除控制台的警告
