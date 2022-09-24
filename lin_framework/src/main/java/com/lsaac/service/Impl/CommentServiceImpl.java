@@ -7,6 +7,8 @@ import com.lsaac.domain.entity.Comment;
 
 import com.lsaac.domain.vo.CommentVo;
 import com.lsaac.domain.vo.PageVo;
+import com.lsaac.enums.AppHttpCodeEnum;
+import com.lsaac.exception.SystemException;
 import com.lsaac.mapper.CommentMapper;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -14,8 +16,10 @@ import com.lsaac.service.CommentService;
 //import org.springframework.data.domain.Page;
 import com.lsaac.service.UserService;
 import com.lsaac.utils.BeanCopyUtils;
+import com.lsaac.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -51,6 +55,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
 
         return ResponseResult.okResult(new PageVo(commentVoList,page.getTotal()));
+    }
+
+    @Override
+    public ResponseResult addComment(Comment comment) {
+        //评论内容不能为空
+        if(!StringUtils.hasText(comment.getContent())){
+            throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
+        }
+        save(comment);
+        return ResponseResult.okResult();
     }
 
     /**
