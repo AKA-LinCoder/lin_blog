@@ -32,6 +32,7 @@ public class UserController {
 //    }
 //
     @PostMapping("/register")
+    @SystemLog(businessName = "注册账号")
     public ResponseResult register(@RequestBody User user){
         return userService.register(user);
     }

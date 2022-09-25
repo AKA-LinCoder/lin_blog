@@ -1,5 +1,6 @@
 package com.lsaac.controller;
 
+import com.lsaac.annotation.SystemLog;
 import com.lsaac.domain.ResponseResult;
 import com.lsaac.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class UploadController {
     private UploadService uploadService;
 
     @PostMapping("/upload")
+    @SystemLog(businessName = "上传图片")
     public ResponseResult uploadImg(MultipartFile img) throws IOException {
         return uploadService.uploadImg(img);
     }

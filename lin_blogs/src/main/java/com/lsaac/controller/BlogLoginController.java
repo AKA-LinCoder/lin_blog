@@ -1,5 +1,6 @@
 package com.lsaac.controller;
 
+import com.lsaac.annotation.SystemLog;
 import com.lsaac.domain.ResponseResult;
 import com.lsaac.domain.entity.User;
 import com.lsaac.enums.AppHttpCodeEnum;
@@ -18,6 +19,7 @@ public class BlogLoginController {
     private BlogLoginService blogLoginService;
 
     @PostMapping("/login")
+    @SystemLog(businessName = "登陆")
     public ResponseResult login(@RequestBody User user){
         if(!StringUtils.hasText(user.getUserName())){
             //提示 必须要传用户名
@@ -27,6 +29,7 @@ public class BlogLoginController {
     }
 
     @PostMapping("/logout")
+    @SystemLog(businessName = "退出登陆")
     public ResponseResult logout(){
         return blogLoginService.logout();
     }

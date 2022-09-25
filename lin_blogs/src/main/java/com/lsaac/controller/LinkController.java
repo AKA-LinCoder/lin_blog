@@ -1,5 +1,6 @@
 package com.lsaac.controller;
 
+import com.lsaac.annotation.SystemLog;
 import com.lsaac.domain.ResponseResult;
 import com.lsaac.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class LinkController {
     private LinkService linkService;
 
     @GetMapping("/getAllLink")
+    @SystemLog(businessName = "获取友链")
     public ResponseResult getAllLink(){
         return linkService.getAllLink();
     }
