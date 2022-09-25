@@ -33,7 +33,7 @@ public class linBlogAdminApplication {
 
 
     public static void main(String[] args){
-        disableWarning();
+//        disableWarning();
         SpringApplication.run(linBlogAdminApplication.class,args);
     }
 }
